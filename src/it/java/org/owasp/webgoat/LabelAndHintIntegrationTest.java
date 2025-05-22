@@ -111,12 +111,12 @@ public class LabelAndHintIntegrationTest extends IntegrationTest {
         Properties prop = null;
         if (lang == null || lang.equals("")) { lang = ""; } else { lang = "_"+lang; }
         try (InputStream input = new FileInputStream("src/main/resources/i18n/messages"+lang+".properties")) {
-
+    
             prop = new Properties();
             // load a properties file
             prop.load(input);
         } catch (Exception e) {
-            e.printStackTrace();
+            // Handle the exception appropriately
         }
         return prop;
     }
@@ -124,7 +124,7 @@ public class LabelAndHintIntegrationTest extends IntegrationTest {
     private void checkLang(Properties propsDefault, String lang) {
         JsonPath jsonPath = getLabels(lang);
         Properties propsLang = getProperties(lang);
-
+    
         for (String key: propsLang.stringPropertyNames()) {
             if (!propsDefault.containsKey(key)) {
                 System.err.println("key: " + key + " in (" +lang+") is missing from default properties");
